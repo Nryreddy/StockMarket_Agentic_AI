@@ -22,24 +22,24 @@ web_search_agent=Agent(
 )
 
 ## Stock Market agent
-finance_agent=Agent(
+StockMarket_agent=Agent(
     name="Stock Market AI Agent",
     model=Groq(id="llama3-groq-70b-8192-tool-use-preview"),
     tools=[
         YFinanceTools(stock_price=True,company_info=True, analyst_recommendations=True, stock_fundamentals=True,
                       company_news=True,historical_prices=True),
     ],
-    instructions=["Use tables to display the data"],
+    instructions=["Use tables and graphs to display the data"],
     show_tool_calls=True,
     markdown=True,
 
 )
 
 multi_ai_agent=Agent(
-    team=[web_search_agent,finance_agent],
+    team=[web_search_agent,StockMarket_agent],
     instructions=["Always include sources","Use table to display the data"],
     show_tool_calls=True,
     markdown=True,
 )
 
-multi_ai_agent.print_response("Summarize analyst recommendation and share the latest news for NVDA",stream=True)
+multi_ai_agent.print_response("Summarize analyst recommendation , historical_prices and share the latest news for Apple",stream=True)
